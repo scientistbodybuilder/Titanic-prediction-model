@@ -11,12 +11,23 @@ data = pd.read_csv('Titanic-Dataset.csv')
 df  = data.drop(['Name','Ticket','Cabin','Embarked'],axis='columns')
 df = df.fillna({'Age': df['Age'].median()})
 
+def func(x):
+    if x < 8:
+        return 0
+    elif x >= 8 and x < 15:
+        return 1
+    elif x >= 15 and x < 31:
+        return 2
+    else:
+        return 3
+
 df['Family'] = df['SibSp'] + df['Parch']
+df['Fare Level'] = df.apply(lambda x: func(x['Fare']), axis=1)
 df = df.drop(['SibSp','Parch'],axis='columns')
-df = df[['Age', 'Sex', 'Family', 'Pclass', 'Survived']]
+df = df[['Age', 'Sex', 'Family', 'Pclass', 'Fare Level', 'Survived']]
 df.reset_index(inplace=True, drop=True)
 
-train_data = df.sample(frac=0.8, random_state=46)
+train_data = df.sample(frac=0.8, random_state=50)
 val_data = df.drop(train_data.index)
 # val_data.to_excel('rf Validation_data.xlsx', index=False)
 
