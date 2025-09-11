@@ -16,9 +16,9 @@ df = df.drop(['SibSp','Parch'],axis='columns')
 df = df[['Age', 'Sex', 'Family', 'Pclass', 'Survived']]
 df.reset_index(inplace=True, drop=True)
 
-train_data = df.sample(frac=0.8, random_state=25)
+train_data = df.sample(frac=0.8, random_state=46)
 val_data = df.drop(train_data.index)
-val_data.to_excel('rf Validation_data.xlsx', index=False)
+# val_data.to_excel('rf Validation_data.xlsx', index=False)
 
 # At time to make a split, instead of considering all available features to find the lowest impurity split,
 # randomly select a subset of the variables, and select the best split from that.

@@ -16,9 +16,9 @@ df = df.drop(['SibSp','Parch'],axis='columns')
 df = df[['Age', 'Sex', 'Family', 'Pclass', 'PassengerId', 'Survived']]
 df.reset_index(inplace=True, drop=True)
 
-train_data = df.sample(frac=0.8, random_state=100)
+train_data = df.sample(frac=0.8, random_state=46)
 val_data = df.drop(train_data.index)
-val_data.to_excel('DT Validation_data.xlsx', index=False)
+# val_data.to_excel('DT Validation_data.xlsx', index=False)
 
 
 X = train_data[train_data.columns[:-2]] #avoid the passengerId
@@ -36,7 +36,7 @@ result_df = pd.DataFrame({'id':[], 'prediction':[]})
 for x in predict_results:
     result_df = pd.concat([result_df,pd.DataFrame({'id': [x['id']], 'prediction': [x['prediction']]})], axis=0)
 
-result_df.to_excel('DT Predictions.xlsx', index=False)
+# result_df.to_excel('DT Predictions.xlsx', index=False)
 
 total = val_data.shape[0]
 
